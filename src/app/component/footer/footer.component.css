@@ -1,0 +1,11 @@
+.admin-footer {
+   
+    color: #e3e8ee;
+    padding: 20px;
+    text-align: center;
+    position: fixed;
+   bottom: 0;
+   width: 100%;
+   height: 60px; 
+  }
+  

@@ -1,0 +1,50 @@
+ <div class="container mt-5">
+    <div class="row">
+        <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="panel panel-dark panel-colorful">
+                <div class="panel-body text-center"(click)="gotoCategory()" >
+                	<p class="text-uppercase mar-btm text-sm">Create Category</p>
+                	<i class="fa fa-users fa-5x"></i>
+                	<hr>
+                	<p class="h2 text-thin">Categories</p>
+                	<small><span class="text-semibold">  {{categoryListSize}}</span></small>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-6 col-xs-12">
+        	<div class="panel panel-danger panel-colorful">
+        		<div class="panel-body text-center">
+        			<p class="text-uppercase mar-btm text-sm">Add Mobiles</p>
+        			<i class="fa fa-comment fa-5x"></i>
+        			<hr>
+        			<p class="h2 text-thin">Mobiles</p>
+        			<small><span class="text-semibold"><i class="fa fa-unlock-alt fa-fw"></i> {{mobileListSize}}</span> Unapproved comments</small>
+        		</div>
+        	</div>
+        </div>
+        <div class="col-md-3 col-sm-6 col-xs-12">
+        	<div class="panel panel-primary panel-colorful">
+        		<div class="panel-body text-center">
+        			<p class="text-uppercase mar-btm text-sm">Customers</p>
+        			<i class="fa fa-shopping-cart fa-5x"></i>
+        			<hr>
+        			<p class="h2 text-thin">Customers</p>
+        			<small><span class="text-semibold"><i class="fa fa-shopping-cart fa-fw"></i>{{customersListSize}}</span></small>
+        		</div>
+        	</div>
+        </div>
+        <div class="col-md-3 col-sm-6 col-xs-12">
+        	<div class="panel panel-info panel-colorful">
+        		<div class="panel-body text-center">
+        			<p class="text-uppercase mar-btm text-sm">Orders</p>
+        			<i class="fa fa-dollar fa-5x"></i>
+        			<hr>
+        			<p class="h2 text-thin">Total Orders</p>
+        			<small><span class="text-semibold"><i class="fa fa-dollar fa-fw"></i>{{orderListSize}}</span></small>
+        		</div>
+        	</div>
+        </div>             
+	</div> 
+
+
+  

@@ -1,0 +1,68 @@
+<div class="container justify-content-center">
+  <div class="col-lg-max mt-4 mt-lg-0">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="user-dashboard-info-box table-responsive mb-0 bg-white p-4
+          shadow-sm">
+          <table class="table manage-candidates-top mb-0" >
+            <thead>
+              <tr>
+                <th colspan="7" style="text-align:center; font-weight:bold;font-size:22px;">Order List</th>
+              </tr>
+              <tr>
+                
+                <th>Order Id</th>
+                <th>Order Date</th>
+                <th>Order List</th>
+                <th>Total Cost</th>
+                <th>Order Status</th>
+                <th class="text-center">Payment</th>
+                <th class="action text-right">Action</th>
+              </tr>
+            </thead>
+            <tbody  *ngFor="let order of orderList">
+              <tr class="candidates-list">
+                
+                <td class="candidate-list-favourite-time text-center"> 
+                  {{order.id}}</td>
+                <td>{{order.orderDate}}</td>
+                <td class="title">
+                  
+                  <div class="candidate-list-option"  style="max-height: 50px; overflow-y: auto;">
+                    <tr  *ngFor="let product of order.mobiles"  >
+                      
+                        <td>
+                          {{product.mobileName}}</td>
+                        <td>{{product.mobileCost}}</td>
+                     
+                    </tr>
+                  </div>
+
+                </td>
+
+                <td>{{order.cost}}</td>
+                <td>{{order.orderStatus }}</td>
+                <td>
+                  <tr>
+                    <td>{{order.payment?.paymentId}}</td>
+                    <td>{{order.payment?.paymentMode}}</td>
+                    <td>{{order.payment?.paymentStatus}}</td>
+                  </tr>
+                </td>
+
+                <td *ngIf="(order.orderStatus=='PLACED') " >
+                  <a style="color:
+                  #cecece;"(click)="cancelOrder(order.id)"><i
+                      class="fas
+                      fa-trash-alt"></i></a>
+                </td>
+              </tr>
+
+            </tbody>
+          </table>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
