@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Category } from 'src/app/model/category';
+import { Mobile } from 'src/app/model/mobile';
 import { AdminService } from 'src/app/service/adminService/admin.service';
 import { CustomerService } from 'src/app/service/customerService/customer.service';
 
@@ -12,6 +13,8 @@ export class DisplayCategoriesComponent {
   category: Category = new Category();
   search: String = '';
   categoryList: Category[] = [];
+  productList:Mobile[]=[];
+  filterCategory:any;
 
   constructor(
     private categoryService: AdminService,
@@ -24,8 +27,11 @@ export class DisplayCategoriesComponent {
 
   loadAllCategories() {
     this.categoryService.getAllCategories().subscribe({
-      next: (data) => {this.categoryList = data;},
+      next: (data) => {this.categoryList = data;
+   
+      },
       error: (error) => {},
     });
   }
+
 }

@@ -14,11 +14,14 @@
               <h6 class="user-email">{{user.email}}</h6>
             </div>
             <div class="about">
-              <button type="button" id="submit"
+              <button *ngIf="user.status=='Active'" type="button" id="submit"
                 name="submit" class="btn btn-secondary
                 btn-margin px-3 mb-2" (click)="deactivateAccount()">Deactivate
                 Account</button>
-
+                <button *ngIf="user.status=='InActive'"type="button" id="submit"
+                name="submit" class="btn btn-secondary
+                btn-margin px-3 mb-2" (click)="activateAccount()">Activate
+                Account</button>
               <button type="button" id="submit"
                 name="submit" class="btn btn-secondary
                 btn-margin px-3">Logout</button>

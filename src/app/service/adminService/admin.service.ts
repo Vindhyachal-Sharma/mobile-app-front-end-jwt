@@ -17,7 +17,8 @@ export class AdminService {
 
 
   public registerNewAdmin(request: any) {
-    return this.api.post("/admin/register", request)
+    let headers=this.api.getHeader()
+    return this.http.post("http://localhost:8092/admin/register", request,{headers,responseType:'json'})
   }
 
   public updateAdminDetails(adminId: number, request: any) {

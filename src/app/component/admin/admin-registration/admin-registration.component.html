@@ -56,10 +56,9 @@
               getControl('email')!.invalid"
               class="text-right text-danger">
               Email is required.</div>
-            <div *ngIf="getControl('email') &&
-              getControl('email')!.hasError('email')" class="text-right
-              text-danger">
-              Invalid Email.</div>
+              <div *ngIf="getControl('email') &&
+              getControl('email')!.hasError('pattern')
+              "class="text-right text-danger">Invalid Email.</div>
           </div>
         </div>
 
@@ -128,5 +127,3 @@
 
     </form>
   </div>
-
-</div>

@@ -16,7 +16,7 @@
 
   <div class="tab-pane fade show active" id="registration-form"
     role="tabpanel">
-    <form class="form-group was-validated"
+    <form class="form-group"
       #registrationForm="ngForm">
       <div class="row gutters">
         <!-- Name input -->
@@ -25,12 +25,16 @@
           <input type="text" id="registerName" class="form-control"
             name="registerName"
             [(ngModel)]="customer.name"
-            #nameRef="ngModel" required autofocus title="Name is required" />
+            #nameRef="ngModel" pattern="^[a-zA-Z]{3,}$" required autofocus title="Name is required" />
           <div *ngIf="nameRef.invalid && (nameRef.dirty || nameRef.touched)">
             <div *ngIf="nameRef.errors?.['required']" class="text-right
               text-danger">Name is required.</div>
-
+              <div *ngIf="nameRef.errors?.['pattern']" class="text-right
+              text-danger">Username may only contain characters,
+              and must be minimum 3 digits</div>
           </div>
+
+
         </div>
 
         <!-- Username input -->
@@ -46,7 +50,7 @@
             usernameRef.touched)">
             <div *ngIf="usernameRef.errors?.['required']"
               class="text-right text-danger">Username is required.</div>
-            <div *ngIf="nameRef.errors?.['pattern']" class="text-right
+            <div *ngIf="usernameRef.errors?.['pattern']" class="text-right
               text-danger">Username may only contain alphanumeric characters,
               underscores, and hyphens and must be minimum 3 digits</div>
           </div>
@@ -136,7 +140,7 @@
               class="text-right text-danger">Password
               is required.</div>
 
-            <div *ngIf="customer.password!=confirmPassword ||(customer.password)?.length !=   confirmPassword?.length"
+            <div *ngIf="customer.password!=confirmPassword ||(customer.password)?.length !==(confirmPassword)?.length"
               class="text-right text-danger">Password Mismatch.</div>
 
           </div>

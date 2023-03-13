@@ -50,7 +50,7 @@ export class LoginComponent {
         localStorage.setItem('userId', str['userId']);
         localStorage.setItem('role', str['role']);
         localStorage.setItem('userName', str['userName']);
-        this.alertService.apiSuccessMsgReload('Login Successfull', 3000);
+        this.alertService.apiSuccessMsgReload('Login Successfull', 2000);
         this.goToHome();
       },
       error: (err) => {

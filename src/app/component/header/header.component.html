@@ -68,7 +68,7 @@
     data-target="#collapsibleNavbar">
     <span class="navbar-toggler-icon"></span>
   </button>
-    <input type="search" class="form-control"
+    <input type="search" class="form-control " 
       [(ngModel)]="customerService.query"
       placeholder="Search"/>
   <div class="collapse navbar-collapse" id="collapsibleNavbar">
@@ -96,19 +96,24 @@
               <ul class="dropdown-content">
                 <!-- <li><a style=" padding: 10px;padding-left: 5px;padding-right:
                     5px;" routerLink="profile">Admin Profile</a></li> -->
-                <li><a style=" padding: 5px; "routerLink="registerAdmin">Add
+                <li class="dropdown-item"><a style=" padding: 5px;  "routerLink="registerAdmin">Add
                     Admin</a></li>
-                <li><a style=" padding: 10px; "(click)="user.logout()">Logout</a></li>
+                <li class="dropdown-item"><a style=" padding: 10px; "(click)="user.logout()">Logout</a></li>
               </ul>
             </li>
           </ul>
+
+
         </nav>
+
 
 
 
       </li>
     </ul>
 
+
   </div>
+
 
 </nav>

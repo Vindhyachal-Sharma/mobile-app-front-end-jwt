@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Admin } from 'src/app/model/admin';
 import { Customer } from 'src/app/model/customer';
 import { AdminService } from 'src/app/service/adminService/admin.service';
+import { AlertService } from 'src/app/service/alertService/alert.service';
 import { LoginService } from 'src/app/service/authService/login.service';
 import { CustomerService } from 'src/app/service/customerService/customer.service';
 import Swal from 'sweetalert2';
@@ -25,7 +26,8 @@ export class CustomerProfileComponent implements OnInit {
     private router: Router,
     private customerService: CustomerService,
     private adminService: AdminService,
-    public loginService: LoginService
+    public loginService: LoginService,
+    private alert:AlertService
   ) {}
   ngOnInit() {
     this.getCustomerData();
@@ -39,8 +41,11 @@ export class CustomerProfileComponent implements OnInit {
   getCustomerData() {
     this.customerId = localStorage.getItem('userId');
     this.customerService.getUserData(this.customerId).subscribe({
-      next: (data) => {this.user = data;},
-      error: (error) => {},
+      next: (data) => {this.user = data;
+      console.log(data)},
+      error: (error) => {
+        console.log(error)
+      },
     });
   }
 
@@ -49,7 +54,9 @@ export class CustomerProfileComponent implements OnInit {
     console.log(this.user);
     this.user.password = 'Abc@1234';
     this.customerService.updateUserData(this.customerId, this.user).subscribe({
-      next: (data) => {this.getCustomerData();},
+      next: (data) => {
+        this.alert.apiSuccessMsgReload('Profile Updated Successfully',1000)
+      },
       error: (error) => {},
     });
   }
@@ -58,15 +65,25 @@ export class CustomerProfileComponent implements OnInit {
     this.customerId = localStorage.getItem('userId');
     this.customerService.deactivateAccount(this.customerId).subscribe({
       next: (data) => {
-        Swal.fire({
-          icon:'success',
-          title:'Account Deactivated Successfully',
-        }).then()
-        this.loginService.logout()
+        this.alert.apiSuccessMsgReload('Id DeActivated Successfully',1000)
       },
       error: (error) => {
-        console.log(error);
+        this.alert.apiSuccessMsgReload('Id DeActivated Successfully',1000)
       },
     });
   }
+  activateAccount() {
+    this.customerId = localStorage.getItem('userId');
+    this.customerService.activateAccount(this.customerId).subscribe({
+      next: (data) => {
+        this.alert.apiSuccessMsgReload('Id Activated Successfully',1000)
+      },
+      error: (error) => {
+        this.alert.apiSuccessMsgReload('Id Activated Successfully',1000)
+      },
+    });
+  }
+
+
+
 }

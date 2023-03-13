@@ -39,13 +39,15 @@ export class CategoryComponent {
       next: (data) => {this.loadAllCategories();
         this.alert.apiSuccessMsgReload('Category Added Succesfully',1000)
       },
-      error: (error) => {},
+      error: (error) => {
+        this.alert.apiFail(error)
+      },
     });
   }
 
   loadAllCategories() {
     this.categoryService.getAllCategories().subscribe({
-      next: (data) => {this.categoryList = data;},
+      next: (data) => {this.categoryList = data.reverse();},
         error: (error) => {},
     });
   }

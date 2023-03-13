@@ -64,8 +64,13 @@ export class CustomerService {
 
   public deactivateAccount(customerId:any){
     let headers=this.api.getHeader()
-    return this.http.put("http://localhost:8092/customer/account/"+customerId, {headers, responseType: 'text' as 'json' })
+    return this.http.put("http://localhost:8092/customer/deactivate/"+customerId, {headers,responseType:'text'}) 
   }
+  public activateAccount(customerId:any){
+    let headers=this.api.getHeader()
+    return this.http.put("http://localhost:8092/customer/activate/"+customerId, {headers ,responseType:'text'})
+  }
+
 
   public getOrdersListOfCustomer(customerId:number):Observable<any>{
     let headers=this.api.getHeader()

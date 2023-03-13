@@ -1,3 +1,4 @@
+import { JsonPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import {
   FormGroup,
@@ -35,15 +36,19 @@ export class AdminRegistrationComponent {
           Validators.required,
           Validators.pattern('^[a-zA-Z0-9_-]{3,}$'),
         ]),
-        email: new FormControl('', [Validators.required, Validators.email]),
+        email: new FormControl('', [
+          Validators.required,
+          Validators.pattern('^[a-zA-Z0-9._-]+@[a-zA-Z0-9-]+\\.[a-zA-Z.]{2,5}'),
+        ]),
         mobileNo: new FormControl('', [
           Validators.required,
           Validators.pattern('^[0-9]{10}$'),
         ]),
         password: new FormControl('', [
           Validators.required,
-          Validators.pattern('(?=\\D*\\d)(?=[^a-z]*[a-z])(?=[^A-Z]*[A-Z]).{8,30}')
-
+          Validators.pattern(
+            '(?=\\D*\\d)(?=[^a-z]*[a-z])(?=[^A-Z]*[A-Z]).{8,30}'
+          ),
         ]),
         confirmPassword: new FormControl('', [Validators.required]),
       },
@@ -72,9 +77,13 @@ export class AdminRegistrationComponent {
     this.admin.role = 'Admin';
     this.adminService.registerNewAdmin(this.admin).subscribe({
       next: (data) => {
-        this.alertService.apiSuccessMsg('New Admin Registered Successfully',)
+        this.alertService.apiSuccessMsg(
+          'New Admin Registered Successfully',
+          3000
+        );
       },
       error: (err) => {
+        //  let abc= JSON.parse(JSON.stringify(err.error) )
         this.alertService.apiFail(err);
       },
     });
