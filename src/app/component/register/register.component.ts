@@ -2,8 +2,9 @@ import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Customer } from 'src/app/model/customer';
+import { AlertService } from 'src/app/service/alertService/alert.service';
 import { CustomerService } from 'src/app/service/customerService/customer.service';
-import { LoginService } from 'src/app/service/login.service';
+
 
 @Component({
   selector: 'app-register',
@@ -11,32 +12,22 @@ import { LoginService } from 'src/app/service/login.service';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent {
+
   customer:Customer =new Customer();
-  
-   
-  constructor(private customerService:CustomerService,private router:Router){}
+  confirmPassword?:string
+  constructor(
+    private customerService:CustomerService,
+    private alert:AlertService,
+    private router:Router){}
 
   register(){
-    
-    
+
+
     this.customerService.registerCustomer(this.customer).subscribe({
       next:(data)=>{
-        console.log(data)
-        this.router.navigate(['login'])
-      },
-      error:(err)=>{console.log(err)}
+        this.alert.apiSuccessMsg('Registration Successfull',1000)
+        this.router.navigate(['login'])},
+      error:(err)=>{this.alert.apiFail(err)}
     })
   }
-
-  checkPasswordMatch() {
-    const password = document.getElementById("password") as HTMLInputElement;
-    const confirmPassword = document.getElementById("confirm-password") as HTMLInputElement;
-  
-    if (password.value !== confirmPassword.value) {
-      confirmPassword.setCustomValidity("Passwords do not match");
-    } else {
-      confirmPassword.setCustomValidity("");
-    }
-  }
-  
 }

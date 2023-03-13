@@ -8,5 +8,4 @@ export  class Mobile {
     availability:String="Available"
     orderStatusOfMobile!:String
     description?:String
-
 }

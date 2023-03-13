@@ -1,113 +1,75 @@
-import { isNgContainer } from '@angular/compiler';
 import { Component } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Category } from 'src/app/model/category';
 
 import { AdminService } from 'src/app/service/adminService/admin.service';
-import { LoginService } from 'src/app/service/login.service';
-import Swal from 'sweetalert2';
+import { AlertService } from 'src/app/service/alertService/alert.service';
 import { LoginComponent } from '../../login/login.component';
+import { AddMobileToCategoryComponent } from '../add-mobile-to-category/add-mobile-to-category.component';
+import { EditCategoryComponent } from '../edit-category/edit-category.component';
 
 @Component({
   selector: 'app-category',
   templateUrl: './category.component.html',
   styleUrls: ['./category.component.css'],
-  providers:[LoginComponent]
+  providers: [LoginComponent],
 })
 export class CategoryComponent {
-category:Category=new Category();
+  category: Category = new Category();
+  categoryList: Category[] = [];
+  filtercategory: any;
+  loadMsg: String = '';
+  delMsg: String = '';
+  errorMsg: String = '';
 
-editComponent:any
-
-
-
-
-
-isclicked(){
-sessionStorage.setItem('editComponent',"true")
-window.location.reload()
-}
-
-
-
-  categoryList:Category[]=[];
-  filtercategory:any;
- 
-
-  
-  loadMsg: String = "";
-  delMsg: String = "";
-  errorMsg: String = "";
-  constructor(private categoryService: AdminService,public user: LoginComponent,private router:Router) { }
-  ngOnInit(): void {
-    this.editComponent=sessionStorage.getItem('editComponent')
+  constructor(
+    private categoryService: AdminService,
+    public user: LoginComponent,
+    private router: Router,
+    private dialog: MatDialog,
+    private alert:AlertService
+  ) {}
+  ngOnInit() {
     this.loadAllCategories();
   }
 
-createCategory(){
- 
-    this.categoryService.createCategory(this.category)
-      .subscribe(
-        {
-          next: (data) => { 
-           console.log(data)
-           this.loadAllCategories();
-           this.loadMsg = "Fetched all category, Success!";
-           this.errorMsg = "";
-          },
-          error: (error) => {
-            console.log(error)
-            this.errorMsg = error.error;
-            this.loadMsg = "";
-          }
-          
-        });
-
-        
-      }
-    
-  
-
+  createCategory() {
+    this.categoryService.createCategory(this.category).subscribe({
+      next: (data) => {this.loadAllCategories();
+        this.alert.apiSuccessMsgReload('Category Added Succesfully',1000)
+      },
+      error: (error) => {},
+    });
+  }
 
   loadAllCategories() {
-    this.categoryService.getAllCategories()
-      .subscribe(
-        {
-          next: (data) => {
-            console.log(data);
-            this.categoryList=data;
-            this.filtercategory = data;
-            
-          },
-          error: (error) => {
-            console.log(error);
-          }
-        });
+    this.categoryService.getAllCategories().subscribe({
+      next: (data) => {this.categoryList = data;},
+        error: (error) => {},
+    });
   }
-addMobile(categoryId:any){
-  sessionStorage.setItem('categoryId',categoryId)
-  this.router.navigate(['addMob'])
-}
 
-editCategory(categoryId:any){
- 
+  addMobile(categoryId: any) {
+    sessionStorage.setItem('categoryId', categoryId);
+    this.dialog.open(AddMobileToCategoryComponent, {
+      height: '500px',
+      width: '500px',
+    });
+  }
 
- 
-}
+  editCategory(categoryId: any) {
+    sessionStorage.setItem('updatecategoryId', categoryId);
+    this.dialog.open(EditCategoryComponent, {
+      height: '300px',
+      width: '300px',
+    });
+  }
 
-getAllMobileFromCategory(categoryId:any){
-  sessionStorage.setItem('categoryId',categoryId)
-  this.router.navigate(['getAllMob'])
-}
-
-
-  filter(category:string){
-    this.filtercategory=this.categoryList
-    .filter((a:any)=>{
-      if(a.category==category || category==' '){
-        return a;
-      }
-    })
+  getAllMobileFromCategory(categoryId: any) {
+    sessionStorage.setItem('categoryId', categoryId);
+    this.router.navigate(['getAllMob']);
+  }
 
   }
-}
+

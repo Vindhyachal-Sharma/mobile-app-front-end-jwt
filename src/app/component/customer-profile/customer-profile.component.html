@@ -1,124 +1,116 @@
 <div class="container">
-    <div class="row gutters">
-        <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
-            <div class="card h-100">
-                <div class="card-body">
-                    <div class="account-settings">
-                        <div class="user-profile">
-                            <div class="user-avatar">
-                                <img
-                                    src="https://bootdey.com/img/Content/avatar/avatar7.png"
-                                    alt="Maxwell Admin">
-                            </div>
-                            <h5 class="user-name">{{user.name}}</h5>
-                            <h6 class="user-email">{{user.email}}</h6>
-                        </div>
-                        <div class="about">
-                            <h5>About</h5>
-                            <p></p>
-                        </div>
-                    </div>
-                </div>
+  <div class="row ">
+    <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
+      <div class="card h-100">
+        <div class="card-body">
+          <div class="account-settings">
+            <div class="user-profile">
+              <div class="user-avatar">
+                <img
+                  src="https://bootdey.com/img/Content/avatar/avatar7.png"
+                  alt="Maxwell Admin">
+              </div>
+              <h5 class="user-name">{{user.name}}</h5>
+              <h6 class="user-email">{{user.email}}</h6>
             </div>
-        </div>
-        <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
-            <div class="card h-100">
-                <div class="card-body">
-                   
-                    <div class="row gutters">
-                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12
-                            col-12">
-                            <h6 class="mb-2 text-primary">Personal Details</h6>
-                        </div>
-                        
-                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                            <div class="form-group" id="updateform">
-                                <label for="fullName">Full Name</label>
-                                <input type="text" class="form-control"
-                                    id="fullName" [(ngModel)]="user.name"
-                                    placeholder="Enter full name"
-                                    value="{{user.name}}"
-                                    #nameRef="ngModel" required autofocus
-                                    title="Username is required" />
+            <div class="about">
+              <button type="button" id="submit"
+                name="submit" class="btn btn-secondary
+                btn-margin px-3 mb-2" (click)="deactivateAccount()">Deactivate
+                Account</button>
 
-                                <div *ngIf="nameRef.invalid && (nameRef.dirty ||
-                                    nameRef.touched)">
-                                    <div *ngIf="nameRef.errors?.['required']"
-                                        class="text-right text-danger">Username
-                                        is required.</div>
-
-                                </div>
-
-                            </div>
-                        </div>
-                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                            <div class="form-group">
-                                <label for="text">Username</label>
-                                <input type="url" class="form-control"
-                                    id="website" placeholder="Website url"
-                                    value="{{user.userName}}" disabled>
-                            </div>
-                        </div>
-                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                            <div class="form-group">
-                                <label for="eMail">Email</label>
-                                <input type="email" class="form-control"
-                                    id="eMail" placeholder="Enter email ID"
-                                    value="{{user.email}}" disabled>
-                            </div>
-                        </div>
-                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                            <div class="form-group">
-                                <label for="phone">Phone</label>
-                                <input type="text" class="form-control"
-                                    id="phone" placeholder="Enter phone number"
-                                    value="{{user.mobileNo}}" disabled>
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="row gutters">
-                        <div class="form-outline mb-4">
-                            <label class="form-label" for="address">Address</label>
-                            <textarea type="text" id="address"
-                                class="form-control" name="address"
-                                style="height: 50px;" maxlength="200"
-                                [(ngModel)]="user.address"
-                                value="{{user.address}}" #addressRef="ngModel"></textarea>
-                            <div *ngIf="addressRef.invalid && (addressRef.dirty
-                                ||
-                                addressRef.touched)">
-
-                                <div *ngIf="addressRef.errors?.['required']"
-                                    class="text-right text-danger">Address required.</div>
-                            </div>
-                        </div>
-                        <div class="row gutters">
-                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12
-                                col-12">
-                                <div class="text-center">
-
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row gutters">
-                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12
-                                col-12">
-                                <div class="text-right">
-                                    <button type="button" id="submit"
-                                        name="submit" class="btn btn-secondary
-                                        btn-margin " (click)="onCancel()">Cancel</button>
-                                    <button type="button" id="submit"
-                                        name="submit" class="btn btn-primary
-                                        btn-margin"
-                                        (click)="updateCustomerData()">Update</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                
-                </div>
+              <button type="button" id="submit"
+                name="submit" class="btn btn-secondary
+                btn-margin px-3">Logout</button>
             </div>
+          </div>
         </div>
+      </div>
     </div>
+    <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
+      <div class="card h-100">
+        <div class="card-body">
+
+          <div class="row ">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12
+              col-12">
+              <h6 class="mb-2 text-primary">Personal Details</h6>
+            </div>
+
+            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+              <div class="form-group" id="updateform">
+                <label for="fullName">Full Name</label>
+                <input type="text" class="form-control"
+                  id="fullName" [(ngModel)]="user.name"
+                  placeholder="Enter full name"
+                  value="{{user.name}}"
+                  #nameRef="ngModel" [disabled]="!isEditable" required autofocus
+                  title="Username is required" />
+
+                <div *ngIf="nameRef.invalid && (nameRef.dirty ||
+                  nameRef.touched)">
+                  <div *ngIf="nameRef.errors?.['required']"
+                    class="text-right text-danger">Username
+                    is required.</div>
+
+                </div>
+
+              </div>
+            </div>
+            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+              <div class="form-group">
+                <label for="text">Username</label>
+                <input type="url" class="form-control"
+                  id="website" placeholder="Website url"
+                  value="{{user.userName}}" disabled>
+              </div>
+            </div>
+            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+              <div class="form-group">
+                <label for="eMail">Email</label>
+                <input type="email" class="form-control"
+                  id="eMail" placeholder="Enter email ID"
+                  value="{{user.email}}" disabled>
+              </div>
+            </div>
+            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+              <div class="form-group">
+                <label for="phone">Phone</label>
+                <input type="text" class="form-control"
+                  id="phone" placeholder="Enter phone number"
+                  value="{{user.mobileNo}}" disabled>
+              </div>
+            </div>
+
+          </div>
+          <div class="form-outline mb-4">
+            <label class="form-label" for="address">Address</label>
+            <textarea type="text" id="address"
+              class="form-control" name="address"
+              style="height: 50px;" maxlength="200"
+              [(ngModel)]="user.address" [disabled]="!isEditable"
+              value="{{user.address}}" #addressRef="ngModel" required></textarea>
+            <div *ngIf="addressRef.invalid && (addressRef.dirty
+              ||addressRef.touched)">
+              <div *ngIf="addressRef.errors?.['required']"
+                class="text-right text-danger">Address required.</div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="text-right text-center">
+              <button *ngIf="!isEditable" type="button" id="submit"
+                name="submit" class="btn btn-primary
+                btn-margin" (click)="editClicked()">Update Profile</button>
+              <button *ngIf="isEditable" type="button " id="submit"
+                name="submit" class="btn btn-primary
+                btn-margin px-3" (click)="updateCustomerData()">Save Profile</button>
+              <button *ngIf="isEditable" type="button" id="submit"
+                name="submit" class="btn btn-secondary
+                btn-margin px-3" (click)=" editClicked() ">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

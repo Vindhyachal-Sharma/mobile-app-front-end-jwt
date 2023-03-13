@@ -1,146 +1,92 @@
-<div class="container " *ngIf="user.isAdmin()">
-    <div class="row justify-content-center">
-        <div class="col-md-5 mt-5 bg-light rounded">
-            <h1 class="text-center font-weight-bold text-primary">Create a
-                Category</h1>
-            <hr class="bg-light">
-            <h5 class="text-center text-success"></h5>
-            <form 
-                class="form-group p-2" 
-                #categoryForm="ngForm">
+<div class="container ">
+  <div class="row justify-content-center">
+    <div class="col-md-5 mt-5 bg-light rounded">
+      <h1 class="text-center font-weight-bold text-primary">Create a
+        Category</h1>
+      <hr class="bg-light">
+      <h5 class="text-center text-success"></h5>
+      <form
+        class="form-group p-2"
+        #categoryForm="ngForm">
 
-                <div class="form-group input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">Category Name</span>
-                    </div>
-                    <input type="text" name="name" class="form-control"
-                    [(ngModel)]="category.name"
-                    #nameRef="ngModel" required title="Category Name is required"  >
-                        
-                </div>
-                <div *ngIf="nameRef.invalid && (nameRef.dirty || nameRef.touched)">
-                            <div *ngIf="nameRef.errors?.['required']" class="alert
-                              alert-danger">Username is required.</div>
-                              </div>
-
-                <div class="form-group">
-                    <input type="submit" name="submit" id="submit" class="btn
-                        btn-primary btn-block"
-                        value="Send"[disabled]="!categoryForm.form.valid"
-                        (click)="createCategory()">
-                </div>
-            </form>
+        <div *ngIf="nameRef.invalid && (nameRef.dirty || nameRef.touched)">
+          <div *ngIf="nameRef.errors?.['required']" class="text-right
+            text-danger">Category name is required.</div>
         </div>
-    </div>
-</div>
-
-
-<div class="container " *ngIf="editComponent==true">
-    <div class="row justify-content-center">
-        <div class="col-md-5 mt-5 bg-light rounded">
-            <h1 class="text-center font-weight-bold text-primary">Edit
-                Category</h1>
-            <hr class="bg-light">
-            <h5 class="text-center text-success"></h5>
-            <form 
-                class="form-group p-2" 
-                #categoryForm="ngForm">
-
-                <div class="form-group input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">Category Name</span>
-                    </div>
-                    <input type="text" name="name" class="form-control"
-                    [(ngModel)]="category.name"
-                    #nameRef="ngModel" required title="Category Name is required"  >
-                        
-                </div>
-                <div *ngIf="nameRef.invalid && (nameRef.dirty || nameRef.touched)">
-                            <div *ngIf="nameRef.errors?.['required']" class="alert
-                              alert-danger">Username is required.</div>
-                              </div>
-
-                <div class="form-group">
-                    <input type="submit" name="submit" id="submit" class="btn
-                        btn-primary btn-block"
-                        value="Send"[disabled]="!categoryForm.form.valid"
-                        (click)="editCategory(category.id)">
-                </div>
-            </form>
+        <div class="form-group input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Category Name</span>
+          </div>
+          <input type="text" name="name" class="form-control"
+            [(ngModel)]="category.name"
+            #nameRef="ngModel" required title="Category Name is required">
         </div>
+
+
+        <div class="form-group">
+          <input type="submit" name="submit" id="submit" class="btn
+            btn-primary btn-block"
+            value="Send"[disabled]="!categoryForm.form.valid"
+            (click)="createCategory()">
+        </div>
+      </form>
     </div>
+  </div>
 </div>
 
 
 
 
 <div *ngIf="categoryList.length == 0">
-    <p class="alert alert-info">No data found for Category on server.</p>
+  <p class="alert alert-info">No data found for Category on server.</p>
 </div>
 
 <div *ngIf="categoryList.length> 0">
+  <div class="container justify-content-center">
+    <div class="col-lg-max mt-4 mt-lg-0">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="user-dashboard-info-box table-responsive
+            mb-0
+            bg-white p-4
+            shadow-sm">
+            <table class="table manage-candidates-top mb-0">
+              <thead>
+                <tr>
+                  <th>CategoryName</th>
+                  <th>Mobiles</th>
+                  <th class="action text-right">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let category of categoryList">
+                  <td class="candidate-list-favourite-time
+                    ps-3"><strong>{{category.name}}</strong></td>
+                  <td>
+                    <button class="btn-warning
+                      rounded"(click)="getAllMobileFromCategory(category.id)">View
+                      Mobiles
+                    </button>
+                  </td>
+                  <td>
+                    <ul class="list-unstyled mb-0 d-flex
+                      justify-content-end">
+                      <li><button class="btn-success
+                          rounded"(click)="addMobile(category.id)">Add
+                          Mobiles</button></li>
+                      &nbsp;&nbsp;
+                      <li><button class="btn-primary
+                          rounded"(click)="editCategory(category.id)">Edit
+                          Category</button></li>
+                    </ul>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
 
-   
-
-
-    <div class="container justify-content-center">
-        <div class="col-lg-max mt-4 mt-lg-0">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="user-dashboard-info-box table-responsive
-                        mb-0
-                        bg-white p-4
-                        shadow-sm">
-                        <table class="table manage-candidates-top mb-0">
-                            <thead>
-                                <tr>
-                                    <th>CategoryName</th>
-                                    <th>Mobiles</th>
-                                    <th class="action text-right">Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr *ngFor="let category of categoryList">
-                                    <td class="candidate-list-favourite-time
-                                        ps-3"><strong>{{category.name}}</strong></td>
-                                    <td  style="max-height: 300px; overflow-y: auto;">
-                                        <tr class="candidates-list"
-                                            *ngFor="let product of category.mobiles">
-                                            <td  style="max-height: 300px; overflow-y: auto;"(click)="getAllMobileFromCategory(category.id)" >{{product.mobileName+"-"+product.mobileCost}}</td>
-                                        </tr>
-                                    </td>
-                                    <td>
-                                        <ul class="list-unstyled mb-0 d-flex
-                                            justify-content-end">
-                                            <li><button class="btn-primary
-                                                    rounded"(click)="addMobile(category.id)">Add
-                                                    Mobiles</button></li>
-                                                    &nbsp;&nbsp;
-                                                    <li><button class="btn-primary
-                                                        rounded"(click)="editComponent">Edit
-                                                        Category</button></li>
-                                        </ul>
-
-                                       
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-
-                    </div>
-                </div>
-            </div>
+          </div>
         </div>
+      </div>
     </div>
-
-    <div *ngIf="loadMsg">
-        <p class="alert alert-success">{{loadMsg}}</p>
-
-    </div>
-    <div *ngIf="errorMsg">
-        <p class="alert alert-danger">{{errorMsg}}</p>
-
-    </div>
-
+  </div>
 </div>
-
