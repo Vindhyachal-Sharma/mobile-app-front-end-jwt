@@ -29,13 +29,13 @@
                 <td>{{mobile.mfd}} </td>
                 <td>{{mobile.modelNumber}}</td>
                 <td>{{mobile.companyName }}</td>
-                <td>{{mobile.description }}</td>
+                <td style="white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:15ch">{{mobile.description }}</td>
 
                 <td>
-                  
+
                   <button class=" rounded-3 btn-warning"
                   (click)="getToUpdateMob(mobile.mobileId)">Update</button>
-              
+
                 </td>
               </tr>
 

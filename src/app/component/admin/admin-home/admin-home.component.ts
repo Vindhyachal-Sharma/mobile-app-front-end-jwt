@@ -28,7 +28,7 @@ export class AdminHomeComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.user.checkForToken()
+    this.user.checkForToken();
     this.loadAllCustomers();
     this.loadAllOrders();
     this.loadAllCategories();
@@ -64,8 +64,11 @@ export class AdminHomeComponent implements OnInit {
 
   loadAllPayments() {
     this.adminService.getAllPayments().subscribe({
-      next: (data) => {this.payments = data;},
-      error: (error) => {},
+      next: (data) => {this.payments = data;
+      console.log("payements:",data)},
+      error: (error) => {
+        console.log(error)
+      },
     });
   }
 

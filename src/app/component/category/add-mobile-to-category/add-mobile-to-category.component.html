@@ -22,7 +22,7 @@
         </div>
         <div class="form-group">
           <label for="price">Price</label>
-          <input type="tel" class="form-control"
+          <input type="number" class="form-control"
             id="price" name="price"
             [(ngModel)]="mobile.mobileCost"
             #priceRef="ngModel" required autofocus
@@ -79,7 +79,7 @@
           <textarea type="text" id="description" class="form-control"
             name="description" [(ngModel)]="mobile.description"
             #addressRef="ngModel" required style="height: 50px;"
-            pattern="^[a-zA-Z0-9 ]+$">
+            pattern="^[a-zA-Z0-9 ,@%&().]+$" >
           </textarea>
 
 
@@ -90,8 +90,8 @@
               text-danger">Description
               required.</div>
             <div *ngIf="addressRef.errors?.['pattern']" class="text-right
-              text-danger">Description can only contain letters,numbers and
-              spaces</div>
+              text-danger">Description can only contain letters,numbers,
+              spacesand symbols[,@%&()].</div>
 
           </div>
         </div>

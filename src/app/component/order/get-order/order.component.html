@@ -2,49 +2,41 @@
   <div class="col-lg-max mt-4 mt-lg-0">
     <div class="row">
       <div class="col-md-12">
-        <div class="user-dashboard-info-box table-responsive mb-0 bg-white p-4
+        <div class=" table-responsive mb-0 bg-white p-4
           shadow-sm">
-          <table class="table manage-candidates-top mb-0">
+          <table class="table mb-0">
             <thead>
               <tr>
                 <th colspan="7" style="text-align:center;
                   font-weight:bold;font-size:22px;">Order List</th>
               </tr>
               <tr>
-
                 <th>Order Id</th>
                 <th>Order Date</th>
                 <th>Order List</th>
                 <th>Total Cost</th>
                 <th>Order Status</th>
                 <th class="text-center">Payment</th>
-                <th class="action text-center">Action</th>
+                <th class="action text-center">Order Action</th>
                 <th></th>
               </tr>
             </thead>
-            <tbody *ngFor="let order of orderList|search:customerService.query
-              ">
-              <tr class="candidates-list">
+            <tbody *ngFor="let order of orderList|search:customerService.query">
+              <tr>
 
-                <td class="candidate-list-favourite-time text-center">
+                <td class=" text-center">
                   {{order.id}}</td>
                 <td>{{order.orderDate}}</td>
-                <td>
+                <td >
                   <button class=" rounded-3 btn-warning text-center"
-                    (click)="goToOrder(order.id)">Mobile List</button>
-
-                  <!-- style="max-height: 50px; overflow-y: auto;" -->
-
-                  <!-- <div    (click)="goToOrder(order.id)">
-                    <tr  *ngFor="let product of order.mobiles"   >
-
-                        <td >
-                          {{product.mobileName}}</td>
-                        <td>{{product.mobileCost}}</td>
-
-                    </tr>
-                  </div> -->
+                    (click)="goToOrder(order.id)"> Order List</button>
                 </td>
+                <!-- <td *ngIf="order.mobiles.length==1">
+                  <tr *ngFor="let mob of order.mobiles">
+
+                        <td> {{mob.mobileName}}</td>
+                    </tr>
+                </td> -->
 
                 <td>{{order.cost}}</td>
                 <td>{{order.orderStatus }}</td>
@@ -56,12 +48,15 @@
                 <td>
                   <tr>
                     <td>
-                      <button *ngIf="(order.orderStatus=='PLACED') "class="
-                        rounded-3 btn-danger" (click)="cancelOrder(order.id)">Cancel</button>
+                      <button
+                        *ngIf="(order.orderStatus=='PLACED'||order.orderStatus=='PARTIALLY_CANCELLED')
+                        "class="
+                        rounded-3 btn-danger" (click)="cancelOrder(order.id)">Cancel
+                        Order</button>
                     </td>
                     <td>
                       <button class=" rounded-3 btn-success"
-                        (click)="viewDetails(order.id)">Details</button>
+                        (click)="viewDetails(order.id)">View Details</button>
                     </td>
                   </tr>
                 </td>

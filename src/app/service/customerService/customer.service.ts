@@ -8,12 +8,12 @@ import { ApiService } from '../ApiService/api.service';
 })
 export class CustomerService {
   public query:string="";
-  public search=new BehaviorSubject<string>("");
+
   constructor(private http:HttpClient,private api:ApiService ) { }
 
 
   public registerCustomer(request: any) {
-    
+
     return this.http.post("http://localhost:8092/customer", request, { responseType: 'json' })
   }
 
@@ -64,7 +64,7 @@ export class CustomerService {
 
   public deactivateAccount(customerId:any){
     let headers=this.api.getHeader()
-    return this.http.put("http://localhost:8092/customer/deactivate/"+customerId, {headers,responseType:'text'}) 
+    return this.http.put("http://localhost:8092/customer/deactivate/"+customerId, {headers,responseType:'text'})
   }
   public activateAccount(customerId:any){
     let headers=this.api.getHeader()
@@ -82,12 +82,12 @@ export class CustomerService {
   }
   public cancelOrderById(customerId:any,orderId:number):Observable<any>{
     let headers=this.api.getHeader()
-    return this.http.put("http://localhost:8092/customer/order/"+customerId+"/"+orderId,{headers, responseType: 'json'})
+    return this.http.put("http://localhost:8092/customer/order/"+customerId+"/"+orderId,{ headers, responseType: 'json'})
   }
   public cancelMobileFromOrderById(customerId:any,orderId:number,mobileId:number):Observable<any>{
     let headers=this.api.getHeader()
-    return this.http.put("http://localhost:8092/customer/order/"+customerId+"/"+orderId+"/"+mobileId,{headers, responseType: 'json'})
+    return this.http.put("http://localhost:8092/customer/order/"+customerId+"/"+orderId+"/"+mobileId,{ headers, responseType: 'json'})
   }
-  
+
 
 }

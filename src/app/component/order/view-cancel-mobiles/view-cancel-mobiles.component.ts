@@ -62,6 +62,7 @@ export class ViewCancelMobilesComponent {
           });
 
       }
+      window.location.reload()
     });
   }
 }

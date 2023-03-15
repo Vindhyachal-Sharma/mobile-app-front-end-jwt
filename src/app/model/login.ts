@@ -1,10 +1,10 @@
 import { Cart } from "./cart"
 
 export class Login {
-   
-    userName?: String
+
+    userName?:String
     password?:String
-   
-    
+
+
 
 }

@@ -4,12 +4,12 @@
       <!-- Left elements -->
       <div class="align items-start">
         <a href="" target="_blank" class="float-start">
-          <h1 class="d-none d-md-block mb-0 text-white ">Online Mobile Store
+          <h1 class="d-md-block mb-0 text-white ">Online Mobile Store
             App</h1>
         </a>
       </div>
       <div class="col-lg-12 col-md-5 col-12 ">
-        <div class="input-group rounded-3  align-items-center">
+        <div class="input-group   align-items-center">
           <input type="search" class="form-control"
             [(ngModel)]="customerService.query"
             placeholder="Search"/>
@@ -40,7 +40,7 @@
                         Orders</a></li>
                     <li class="ps-3 pe-3 pt-2 pb-1"><a routerLink="allPayments">My
                         Payments</a></li>
-                    <li class="ps-3 pe-3 pt-2 pb-1"><a (click)="user.logout()">Logout</a></li>
+                    <!-- <li class="ps-3 pe-3 pt-2 pb-1"><a (click)="user.logout()">Logout</a></li> -->
                   </ul>
                 </li>
               </ul>
@@ -60,7 +60,7 @@
     </div>
   </div>
 </header>
-
+<!-- admin header -->
 <nav class="navbar navbar-expand-md bg-primary navbar-dark"
   *ngIf="user.isAdmin()">
   <a class="navbar-brand" routerLink="adminHome">Admin Dashboard</a>
@@ -68,7 +68,7 @@
     data-target="#collapsibleNavbar">
     <span class="navbar-toggler-icon"></span>
   </button>
-    <input type="search" class="form-control " 
+    <input type="search" class="form-control "
       [(ngModel)]="customerService.query"
       placeholder="Search"/>
   <div class="collapse navbar-collapse" id="collapsibleNavbar">

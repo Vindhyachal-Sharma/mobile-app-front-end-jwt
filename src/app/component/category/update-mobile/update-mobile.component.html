@@ -16,21 +16,21 @@
             [(ngModel)]="mobile.mobileName"
             #nameRef="ngModel" required>
           <div *ngIf="nameRef.invalid && (nameRef.dirty || nameRef.touched)">
-            <div *ngIf="nameRef.errors?.['required']" class="alert
-              alert-danger"> MobileName is required.</div>
+            <div *ngIf="nameRef.errors?.['required']" class="text-right
+            text-danger"> MobileName is required.</div>
           </div>
         </div>
         <div class="form-group">
           <label for="mobileCost">Price</label>
-          <input type="text" class="form-control"
+          <input type="number" class="form-control"
             id="mobileCost" name="mobileCost"
             value="{{mobile.mobileCost}}"
             [(ngModel)]="mobile.mobileCost"
             #priceRef="ngModel" required
             pattern="^(0|[1-9]\d*)(\.\d+)?$">
           <div *ngIf="priceRef.invalid && (priceRef.dirty || priceRef.touched)">
-            <div *ngIf="priceRef.errors?.['required']" class="alert
-              alert-danger">Price is required.</div>
+            <div *ngIf="priceRef.errors?.['required']" class="text-right
+            text-danger">Price is required.</div>
             <div *ngIf="priceRef.errors?.['pattern']" class="text-right
               text-danger">Must be greater than zero</div>
           </div>
@@ -86,7 +86,7 @@
             value="{{mobile.description}}"
             [(ngModel)]="mobile.description"
             #addressRef="ngModel" required style="height: 50px;"
-            pattern="^[a-zA-Z0-9 ]+$">
+            pattern="^[a-zA-Z0-9 ,@%&().]+$">
           </textarea>
 
 
@@ -97,8 +97,8 @@
               text-danger">Description
               required.</div>
             <div *ngIf="addressRef.errors?.['pattern']" class="text-right
-              text-danger">Description can only contain letters,numbers and
-              spaces</div>
+              text-danger">Description can only contain letters,numbers,
+              spacesand symbols[,@%&()].</div>
           </div>
         </div>
 

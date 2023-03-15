@@ -31,7 +31,7 @@ export class AdminRegistrationComponent {
   ) {
     this.adminRegister = this.formBuilder.group(
       {
-        name: new FormControl('', [Validators.required]),
+        name: new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z ]{3,}$'),]),
         userName: new FormControl('', [
           Validators.required,
           Validators.pattern('^[a-zA-Z0-9_-]{3,}$'),
@@ -42,7 +42,7 @@ export class AdminRegistrationComponent {
         ]),
         mobileNo: new FormControl('', [
           Validators.required,
-          Validators.pattern('^[0-9]{10}$'),
+          Validators.pattern('^[6-9]\d{9}$'),
         ]),
         password: new FormControl('', [
           Validators.required,

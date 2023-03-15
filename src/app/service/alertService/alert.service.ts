@@ -25,6 +25,7 @@ export class AlertService {
 
   apiSuccessMsg(title:any,timer?:any):any{
     Swal.fire({
+
       title:title,
       showCancelButton:false,
       showConfirmButton:false,

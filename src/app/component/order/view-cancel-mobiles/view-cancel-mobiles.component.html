@@ -21,7 +21,7 @@
               </tr>
             </thead>
             <tbody *ngFor="let mobile of mobileList">
-              <tr class="candidates-list">
+              <tr >
 
                 <td>{{mobile.mobileName}}</td>
                 <td>{{mobile.mobileCost}}</td>
@@ -33,7 +33,7 @@
                 <td>
 
                   <a class="justify-content-end"
-                    *ngIf="!(mobile.orderStatusOfMobile=='PLACED')"(click)="cancelMobileOrder(mobile.mobileId)">
+                    *ngIf="!(mobile.orderStatusOfMobile=='Cancelled')"(click)="cancelMobileOrder(mobile.mobileId)">
                     <i class="fas fa-trash-alt"></i>
                   </a>
                 </td>

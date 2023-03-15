@@ -56,7 +56,7 @@ export class AdminService {
   }
 
   public getAllCategories(): Observable<any> {
-    
+
     return this.http.get("http://localhost:8092/admin/categories", {responseType: "json" })
   }
 
@@ -75,10 +75,9 @@ export class AdminService {
   }
 
   public getMobileDetails(mobileId:any): Observable<any> {
-    
+
     return this.http.get("http://localhost:8092/admin/mobiles/"+mobileId)
   }
-
 
   public loadAllOrders(): Observable<any> {
     let headers=this.api.getHeader()

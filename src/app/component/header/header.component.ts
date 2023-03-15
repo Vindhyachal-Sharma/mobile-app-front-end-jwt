@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ApiService } from 'src/app/service/ApiService/api.service';
+import { LoginService } from 'src/app/service/authService/login.service';
 import { CustomerService } from 'src/app/service/customerService/customer.service';
 
 import { LoginComponent } from '../login/login.component';
-
-
 
 @Component({
   selector: 'app-header',
@@ -17,11 +16,8 @@ export class HeaderComponent implements OnInit {
 
   customerId:any
   public totalItem:any
-
   public searchTerm: string = '';
-
-
-  constructor(public user: LoginComponent, private apiService: ApiService, private router: Router,public customerService:CustomerService) { }
+  constructor(public user: LoginComponent, private apiService: ApiService, private router: Router,public customerService:CustomerService,public loginService:LoginService) { }
 
   ngOnInit() {
     this.user.isLogged = this.user.isLogged
@@ -30,12 +26,6 @@ export class HeaderComponent implements OnInit {
     }
 
 }
-search(event: any) {
-  this.searchTerm = (event.target as HTMLInputElement).value;
-  console.log(this.searchTerm);
-  this.apiService.search.next(this.searchTerm);
-}
-
     goToProducts(){
       sessionStorage.clear()
       this.router.navigate(['getAllMob']).then(() => {
@@ -44,7 +34,7 @@ search(event: any) {
   }
 
     getCart() {
-    
+      if(this.loginService.isLogin()){
       this.customerId = localStorage.getItem('userId')
       this.customerService.getCart(this.customerId)
         .subscribe(
@@ -52,23 +42,15 @@ search(event: any) {
             next: (data) => {
               console.log(data);
               this.totalItem = data.quantity
-             
-  
+
+
             },
             error: (error) => {
             }
           });
   }
+}
 
-  //   goToMyProfile(){
-  //     this.router.navigate(['']).then(() => {
-  //       window.location.reload();
-  //   })
-
-  // }
-
-
- 
 }
 
 

@@ -24,7 +24,7 @@
                 Account</button>
               <button type="button" id="submit"
                 name="submit" class="btn btn-secondary
-                btn-margin px-3">Logout</button>
+                btn-margin px-3" (click)="loginService.logout()">Logout</button>
             </div>
           </div>
         </div>
@@ -47,15 +47,16 @@
                   id="fullName" [(ngModel)]="user.name"
                   placeholder="Enter full name"
                   value="{{user.name}}"
-                  #nameRef="ngModel" [disabled]="!isEditable" required autofocus
+                  #nameRef="ngModel" [disabled]="!isEditable"  pattern="^[a-zA-Z ]{3,}$"required autofocus
                   title="Username is required" />
 
                 <div *ngIf="nameRef.invalid && (nameRef.dirty ||
                   nameRef.touched)">
                   <div *ngIf="nameRef.errors?.['required']"
-                    class="text-right text-danger">Username
-                    is required.</div>
-
+                    class="text-right text-danger">Name is required.</div>
+                    <div *ngIf="nameRef.errors?.['pattern']" class="text-right
+                    text-danger">Name may only contain characters,
+                    and must be minimum 3 digits</div>
                 </div>
 
               </div>
@@ -92,11 +93,15 @@
               class="form-control" name="address"
               style="height: 50px;" maxlength="200"
               [(ngModel)]="user.address" [disabled]="!isEditable"
-              value="{{user.address}}" #addressRef="ngModel" required></textarea>
+              value="{{user.address}}" #addressRef="ngModel" pattern="^(?=.{3,255}$).*" required></textarea>
             <div *ngIf="addressRef.invalid && (addressRef.dirty
               ||addressRef.touched)">
               <div *ngIf="addressRef.errors?.['required']"
                 class="text-right text-danger">Address required.</div>
+                <div *ngIf="addressRef.errors?.['pattern']"
+              class="text-right text-danger">Address must be minumum 3 and maximum 255 Characters.
+              .</div>
+
             </div>
           </div>
 
@@ -110,7 +115,7 @@
                 btn-margin px-3" (click)="updateCustomerData()">Save Profile</button>
               <button *ngIf="isEditable" type="button" id="submit"
                 name="submit" class="btn btn-secondary
-                btn-margin px-3" (click)=" editClicked() ">Cancel</button>
+                btn-margin px-3" (click)=" onCancel() ">Cancel</button>
             </div>
           </div>
         </div>

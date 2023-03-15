@@ -40,7 +40,9 @@ export class EditCategoryComponent implements OnInit {
       .subscribe({
         next: (data) => {this.dialog.closeAll();
         this.alert.apiSuccessMsgReload('Category Name updated successfully',1000)},
-        error: (error) => {},
+        error: (error) => {
+          this.alert.apiFailmsg(error);
+        },
       });
   }
 }

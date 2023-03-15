@@ -17,20 +17,20 @@
   <div class="tab-pane fade show active" id="registration-form"
     role="tabpanel">
     <form class="form-group"
-      #registrationForm="ngForm">
-      <div class="row gutters">
+      #registrationForm="ngForm" (ngSubmit)="onSubmit(registrationForm)">
+      <div class="row ">
         <!-- Name input -->
         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 mb-4">
           <label class="form-label" for="registerName">Name</label>
           <input type="text" id="registerName" class="form-control"
             name="registerName"
             [(ngModel)]="customer.name"
-            #nameRef="ngModel" pattern="^[a-zA-Z]{3,}$" required autofocus title="Name is required" />
+            #nameRef="ngModel" pattern="^[a-zA-Z ]{3,}$" required autofocus title="Name is required" />
           <div *ngIf="nameRef.invalid && (nameRef.dirty || nameRef.touched)">
             <div *ngIf="nameRef.errors?.['required']" class="text-right
               text-danger">Name is required.</div>
               <div *ngIf="nameRef.errors?.['pattern']" class="text-right
-              text-danger">Username may only contain characters,
+              text-danger">Name may only contain characters,
               and must be minimum 3 digits</div>
           </div>
 
@@ -79,7 +79,7 @@
           <input type="tel" id="registerMobNo"
             class="form-control" name="registerMobNo"
             [(ngModel)]="customer.mobileNo"
-            #mobRef="ngModel" required pattern="^[0-9]{10}$" title="Mobile
+            #mobRef="ngModel" required pattern="^[6-9]\d{9}$" title="Mobile
             Number must be 10 digits"/>
           <div class="form-label" *ngIf="mobRef.invalid &&
             (mobRef.dirty || mobRef.touched)">
@@ -100,7 +100,7 @@
             [(ngModel)]="customer.password"
             #pwdRef="ngModel"
             required autofocus
-            pattern="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\S+$).{8,20}$"
+            pattern="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\S+$).{8,}$"
             title="Password must contain at least one digit, one lowercase, one
             uppercase letter, one special symbol (@#$%^&+=) and no whitespace"
             />
@@ -140,7 +140,7 @@
               class="text-right text-danger">Password
               is required.</div>
 
-            <div *ngIf="customer.password!=confirmPassword ||(customer.password)?.length !==(confirmPassword)?.length"
+            <div *ngIf="customer.password!=confirmPassword &&(customer.password)?.length !==(confirmPassword)?.length"
               class="text-right text-danger">Password Mismatch.</div>
 
           </div>
@@ -151,7 +151,7 @@
         <label class="form-label" for="address">Address</label>
         <textarea type="text" id="address" class="form-control"
           name="address" [(ngModel)]="customer.address"
-          #addressRef="ngModel" required style="height: 50px;"> </textarea>
+          #addressRef="ngModel" pattern="^(?=.{3,255}$).*" required style="height: 50px;" > </textarea>
 
 
         <div *ngIf="addressRef.invalid && (addressRef.dirty ||
@@ -160,6 +160,9 @@
           <div *ngIf="addressRef.errors?.['required']"
             class="text-right text-danger">Address
             required.</div>
+            <div *ngIf="addressRef.errors?.['pattern']"
+              class="text-right text-danger">Address must be minumum 3 and maximum 255 Characters.
+              .</div>
         </div>
       </div>
 
@@ -174,9 +177,7 @@
       </div>
 
       <button type="submit" class="btn btn-primary btn-block mb-3"
-        [disabled]="registrationForm.form.invalid ||
-        (customer.password!=confirmPassword)"
-        (click)="register()">Sign
+        >Sign
         up</button>
     </form>
   </div>

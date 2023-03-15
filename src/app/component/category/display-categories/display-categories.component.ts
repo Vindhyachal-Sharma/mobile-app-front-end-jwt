@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { Category } from 'src/app/model/category';
 import { Mobile } from 'src/app/model/mobile';
 import { AdminService } from 'src/app/service/adminService/admin.service';
@@ -18,7 +19,8 @@ export class DisplayCategoriesComponent {
 
   constructor(
     private categoryService: AdminService,
-    public customerService: CustomerService
+    public customerService: CustomerService,
+    private router:Router
   ) {}
 
   ngOnInit() {
@@ -28,10 +30,17 @@ export class DisplayCategoriesComponent {
   loadAllCategories() {
     this.categoryService.getAllCategories().subscribe({
       next: (data) => {this.categoryList = data;
-   
+
       },
       error: (error) => {},
     });
   }
 
+  viewMobilesofCategory(categoryId?:any){
+    sessionStorage.setItem('categoryIdtoView',categoryId)
+    this.router.navigate(['products']).then(() => {
+      window.location.reload();
+  })
+
+}
 }

@@ -1,10 +1,12 @@
+import { NgClass } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { NgForm, NgModel, NgModelGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { Login } from 'src/app/model/login';
 import { AlertService } from 'src/app/service/alertService/alert.service';
 import { LoginService } from 'src/app/service/authService/login.service';
-import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-login',
@@ -15,8 +17,7 @@ export class LoginComponent {
   private isLoggedIn = new BehaviorSubject<Boolean>(false);
   public isLogged = this.isLoggedIn.asObservable();
   user: Login = new Login();
-  msg = '';
-  errorMsg = '';
+
 
   constructor(
     private loginService: LoginService,
@@ -24,13 +25,16 @@ export class LoginComponent {
     private alertService: AlertService
   ) {
     const uname = localStorage.getItem('userName');
-    console.log(uname);
     this.isLoggedIn.next(!!uname);
   }
 
-  onSubmit() {
-    console.log('Clicked login Button');
-    console.log(this.user);
+  onSubmit(ngForm:NgForm) {
+    if(ngForm.form.invalid){
+       this.alertService.error('Please fill required elements')
+    }
+    else{
+      this.login()
+    }
   }
   public isAdmin() {
     if (localStorage.getItem('role') === 'Admin') {
@@ -44,16 +48,18 @@ export class LoginComponent {
     this.loginService.login(this.user).subscribe({
       next: (data: any) => {
         let header = data.headers.get('Authorization');
-        console.log(data.headers);
+
         localStorage.setItem('TOKEN', header);
-        let str = JSON.parse(data.body);
+       let str = JSON.parse(data.body);
+
         localStorage.setItem('userId', str['userId']);
         localStorage.setItem('role', str['role']);
         localStorage.setItem('userName', str['userName']);
-        this.alertService.apiSuccessMsgReload('Login Successfull', 2000);
-        this.goToHome();
+       this.alertService.apiSuccessMsgReload('Login Successfull', 2000);
+      this.goToHome();
       },
       error: (err) => {
+        console.log(err)
         this.alertService.apiFail(err);
       },
     });
@@ -72,12 +78,13 @@ export class LoginComponent {
       this.router.navigate(['adminHome']).then(() => {
         window.location.reload();
       });
-    } else {
+    } else
+    {
       this.router.navigate(['home']).then(() => {
         window.location.reload();
       });
     }
   }
-  
+
 
 }

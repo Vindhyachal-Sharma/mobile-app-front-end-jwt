@@ -41,11 +41,23 @@ export class ApiService {
     return this.http.delete(this.API_BASE_URL + uri, {headers});
   }
 
-  getHeader() {
+  getHeader():HttpHeaders {
     const token = localStorage.getItem('TOKEN');
     const headers = new HttpHeaders({
       'Authorization':  token || '',
     });
     return  headers;
   }
+
+
+ public getAuthorizationHeader():HttpHeaders{
+  // const token=localStorage.getItem('TOKEN');
+  // const headers =new HttpHeaders().set('Authorization',''+token);
+  // return headers
+
+  const token = localStorage.getItem('TOKEN');
+  console.log( token)
+    const headers = new HttpHeaders().set('Authorization',''+token)
+    return  headers;
+}
 }

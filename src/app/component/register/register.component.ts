@@ -25,9 +25,22 @@ export class RegisterComponent {
 
     this.customerService.registerCustomer(this.customer).subscribe({
       next:(data)=>{
+        console.log(data);
         this.alert.apiSuccessMsg('Registration Successfull',1000)
         this.router.navigate(['login'])},
-      error:(err)=>{this.alert.apiFail(err)}
+      error:(err)=>{this.alert.apiFailmsg(err)}
     })
+  }
+
+  onSubmit(ngForm:NgForm) {
+    
+
+if(ngForm.form.invalid){
+
+       this.alert.error('Please fill required elements')
+    }
+    else{
+      this.register()
+    }
   }
 }

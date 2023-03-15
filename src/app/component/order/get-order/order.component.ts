@@ -24,9 +24,6 @@ export class OrderComponent {
   payment: Payment = new Payment();
   searchKey: string = '';
 
-  loadMsg: String = '';
-  delMsg: String = '';
-  errorMsg: String = '';
   constructor(
     public customerService: CustomerService,
     private adminService: AdminService,
@@ -63,8 +60,7 @@ export class OrderComponent {
         icon: 'warning',
         showCancelButton: true,
         confirmButtonText: 'Yes, Cancel it!',
-
-        cancelButtonText: 'No, keep it',
+         cancelButtonText: 'No, keep it',
       }).then((result) => {
         if (result.isConfirmed) {
           this.customerService
@@ -106,8 +102,7 @@ export class OrderComponent {
 
   viewDetails(orderId: any) {
     sessionStorage.setItem('orderIdDetails', orderId);
-
-    this.dialog.open(ViewOrderDetailsComponent, {
+     this.dialog.open(ViewOrderDetailsComponent, {
       height: '340px',
       width: '400px',
     });

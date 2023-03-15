@@ -16,11 +16,10 @@ import { HeaderComponent } from '../../header/header.component';
 })
 export class ProductsComponent implements OnInit {
   customerId: any;
-
+  categoryId:any
   public productList: any;
   public filterCategory: any;
   searchKey: string = '';
-
   constructor(
     public customerService: CustomerService,
     private alert: AlertService,
@@ -31,7 +30,12 @@ export class ProductsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.categoryId = sessionStorage.getItem('categoryIdtoView');
+
     this.getAllMobilesApi();
+
+    this.getAllMobilesByCategory();
+
   }
 
   addtocart(mobileId: number) {
@@ -47,13 +51,24 @@ export class ProductsComponent implements OnInit {
   }
 
   getAllMobilesApi() {
-    this.adminService.getAllMobiles().subscribe({
-      next: (data) => {
-        this.productList = data;
-      },
-      error: (error) => {},
-    });
-  }
+    console.log('categoryid:',this.categoryId);
+      this.adminService.getAllMobiles().subscribe({
+        next: (data) => {this.productList = data;},
+        error: (error) => {},
+      });
+    }
+
+
+    getAllMobilesByCategory(){
+      this.adminService.getMobilesByCategoryId(this.categoryId).subscribe({
+        next: (data) => {this.productList = data;},
+        error: (error) => {console.log(error)},
+      });
+    }
+
+
+
+
 
   gotoDetails(mobileId: any) {
     sessionStorage.setItem('mobileDetailId', mobileId);

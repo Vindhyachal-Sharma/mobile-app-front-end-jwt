@@ -34,9 +34,15 @@ export class CustomerProfileComponent implements OnInit {
   }
 
   editClicked() {
-    console.log(this.isEditable);
     this.isEditable = !this.isEditable;
+
   }
+
+  onCancel(){
+    this.isEditable = !this.isEditable;
+    window.location.reload()
+  }
+
 
   getCustomerData() {
     this.customerId = localStorage.getItem('userId');
@@ -62,6 +68,14 @@ export class CustomerProfileComponent implements OnInit {
   }
 
   deactivateAccount() {
+    Swal.fire({
+      title: 'Are You Sure! Do you want to Deactivate your Account?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, Deactivate it!',
+      cancelButtonText: 'No, keep it',
+    }).then((result) => {
+      if (result.isConfirmed) {
     this.customerId = localStorage.getItem('userId');
     this.customerService.deactivateAccount(this.customerId).subscribe({
       next: (data) => {
@@ -70,8 +84,12 @@ export class CustomerProfileComponent implements OnInit {
       error: (error) => {
         this.alert.apiSuccessMsgReload('Id DeActivated Successfully',1000)
       },
-    });
+    })
+  }});
   }
+
+
+
   activateAccount() {
     this.customerId = localStorage.getItem('userId');
     this.customerService.activateAccount(this.customerId).subscribe({

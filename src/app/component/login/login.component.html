@@ -20,8 +20,8 @@
       aria-labelledby="tab-login">
 
 
-      <form class="form-group was-validated" (ngSubmit)="onSubmit()"
-        #loginForm="ngForm">
+      <form class="form-group was-validated"  #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)"
+       >
 
         <div class="form-outline mb-4">
           <label class="form-label" for="loginName">Username</label>
@@ -29,7 +29,6 @@
             [(ngModel)]="user.userName" pattern="^[a-zA-Z0-9_-]{3,}$"
             #nameRef="ngModel" required autofocus title="Username is required"
             />
-
           <div *ngIf="nameRef.invalid && (nameRef.dirty || nameRef.touched)">
             <div *ngIf="nameRef.errors?.['required']" class="text-right
               text-danger">Username is required.</div>
@@ -72,18 +71,12 @@
 
         <!-- Submit button -->
         <button type="submit" class="btn btn-primary btn-block mb-4" id="submit"
-          [disabled]="!loginForm.form.valid" (click)="login()">Sign in</button>
+           >Sign In</button>
         <!-- Register buttons -->
         <div class="text-center">
-          <p>Not a member? <a routerLink='register'>Register</a></p>
+          <p>Not a member? <a routerLink='/register'>Register</a></p>
         </div>
       </form>
     </div>
-  </div>
-  <div *ngIf="msg">
-    <p class="alert alert-success">{{msg}}</p>
-  </div>
-  <div *ngIf="errorMsg">
-    <p class="alert alert-danger">{{errorMsg}}</p>
   </div>
 </div>
